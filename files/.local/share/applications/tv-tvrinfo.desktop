@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=TVRInfo
+Comment=TVRInfo
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=/usr/bin/mpv --hwdec=vdpau --vo=gpu --hr-seek-framedrop=yes --framedrop=vo https://tvr-tvrinfo.cdn.zitec.com/live/tvrinfo/main.m3u8

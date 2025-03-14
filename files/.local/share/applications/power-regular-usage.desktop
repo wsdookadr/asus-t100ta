@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Power Regular Usage
+Comment=Power Regular Usage
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=/bin/bash -c "export DISPLAY=:0 ; /usr/bin/echo 'regular_usage' > /custom/current_profile.txt ; /custom/onetime.sh ;"

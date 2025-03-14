@@ -1,0 +1,13 @@
+# /home/user/.config/systemd/user/monitor_gsettings.service
+[Unit]
+Description=Monitor that resets gsettings configs
+After=phosh.service
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+ExecStart=/custom/monitor_gsettings.sh
+ExecStop=/usr/bin/pkill -9 -f monitor_gsettings
+
+[Install]
+WantedBy=default.target

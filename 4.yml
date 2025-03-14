@@ -1,0 +1,23 @@
+---
+- name: ASUS T100TA - Custom apps
+  hosts: all
+  become: true
+  become_user: user
+  tasks:
+
+    - name: create apps dir
+      ansible.builtin.file:
+        path: /home/user/apps/
+        state: directory
+        owner: "user"
+        group: "user"
+        mode: '0755'
+
+    - name: get koreader
+      shell: |
+        wget -O ~/apps/koreader.appimage --continue https://github.com/koreader/koreader/releases/download/v2024.11/koreader-appimage-x86_64-linux-gnu-v2024.11.AppImage || true
+        chmod +x ~/apps/koreader.appimage || true
+      args:
+        executable: /bin/bash
+
+

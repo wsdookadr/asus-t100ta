@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=KillApps
+Comment=KillApps
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=sh -c 'pkill -9 -f "librewolf|gnome-calculator|nautilus|gnome-calculator|evince|okular|epiphany|mpv|vlc|NewsFlash|gfeeds|koreader|libreoffice"'

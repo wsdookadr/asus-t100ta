@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Power Extended Reading
+Comment=Power Extended Reading
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=/bin/bash -c "export DISPLAY=:0 ; /usr/bin/echo 'extended_reading' > /custom/current_profile.txt ; /custom/onetime.sh ;"

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=OSK Disable
+Comment=OSK Disable
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=busctl call --user sm.puri.OSK0 /sm/puri/OSK0 sm.puri.OSK0 SetVisible b false

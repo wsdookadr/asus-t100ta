@@ -1,0 +1,95 @@
+---
+- name: ASUS T100TA - Packages
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+
+    - name: Common tools
+      pacman:
+        name:
+          - htop
+          - btop
+          - vim
+          - mc
+          - net-tools
+          - mlocate
+          - ripgrep
+          - kitty
+          - gnome-terminal
+          - parallel
+          - tcpdump
+          - ncdu
+          - iptraf-ng
+          - mtr
+          - curl
+          - wget
+          - dpkg
+          - fuse2 # for appimage binaries
+          - e2fsprogs # for debugfs
+          - man-db
+          - tldr
+          - jq
+          - tailscale
+          - brightnessctl
+          - inetutils
+        # - flatpak # great for sandboxing(allegedly), but not needed currently
+        state: present
+
+    - name: System tools
+      pacman:
+        name:
+          - powertop
+         #- powerstat
+          - inxi
+          - hwinfo
+          - lshw
+          - s-tui
+        state: present
+
+    - name: Apps
+      pacman:
+        name:
+          # utils
+          - gnome-clocks
+          - gnome-calculator
+          # docs
+          - okular
+          - evince
+          - djvulibre
+          - djview
+          - libreoffice-still
+          - gnome-text-editor
+          # audio
+          - qmmp
+          - cmus
+          - mpc
+          # video
+          - mpv
+          - mplayer
+          - ffmpeg
+          - x264
+          - openh264
+          - faad2
+          - smplayer
+          # browsers
+          - epiphany
+          # news readers
+          - gfeeds
+          - newsflash
+        state: present
+
+    # https://specifications.freedesktop.org/desktop-entry-spec/latest/recognized-keys.html
+    # https://askubuntu.com/a/1479157/1658265
+    
+    - name: Sync hide-programs.sh
+      become: true
+      synchronize:
+        src: ./files/custom/hide-programs.sh
+        dest: /custom/hide-programs.sh
+      tags: ["hide"]
+
+    - name: Hide unneeded programs
+      shell: /custom/hide-programs.sh
+      tags: ["hide"]
+

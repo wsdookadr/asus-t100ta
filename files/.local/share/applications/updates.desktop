@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=CA Update
+Comment=CA Update
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=gnome-terminal -- /bin/bash -c 'echo "Update CA"; trust extract-compat;'

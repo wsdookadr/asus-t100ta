@@ -1,0 +1,75 @@
+---
+- name: ASUS T100TA - Configs
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+
+    - name: mpv config dir
+      ansible.builtin.file:
+        path: /home/user/.config/mpv/script-opts
+        state: directory
+        owner: "user"
+        group: "user"
+        mode: '0755'
+
+    - name: mpv config
+      blockinfile:
+        path: /home/user/.config/mpv/script-opts/osc.conf
+        owner: "user"
+        group: "user"
+        create: true
+        block: |
+          visibility=always
+
+    # https://www.freedesktop.org/software/systemd/man/latest/journald.conf.html
+    # https://andreaskaris.github.io/blog/linux/setting-journalctl-limits/
+    - name: Store logs in-memory, don't touch storage(eMMC)
+      blockinfile:
+        path: /etc/systemd/journald.conf
+        create: true
+        block: |
+          [Journal]
+          Storage=volatile
+          SystemMaxUse=30M
+          SystemMaxFileSize=3M
+          ForwardToSyslog=no
+      tags: ["optlogs"]
+
+    - name: reload systemd-journal
+      shell: systemctl force-reload systemd-journald
+      ignore_errors: true
+      tags: ["optlogs"]
+
+    - name: restart systemd-journal
+      shell: systemctl restart systemd-journald
+      ignore_errors: true
+      tags: ["optlogs"]
+
+    - name: remove old logs
+      shell: journalctl --vacuum-size=90M
+      ignore_errors: true
+      tags: ["optlogs"]
+
+    - name: file associations
+      become: true
+      become_user: user
+      copy:
+        dest: /home/user/.config/mimeapps.list
+        content: |
+          [Default Applications]
+          text/plain=org.gnome.TextEditor.desktop
+
+          [Added Associations]
+          text/plain=org.gnome.TextEditor.desktop;
+          application/pdf=org.gnome.Evince.desktop;
+          image/vnd.djvu=djvulibre-djview4.desktop;
+          image/x-djvu=djvulibre-djview4.desktop;
+          application/epub+zip=koreader.desktop;
+          application/x-mobipocket-ebook=koreader.desktop;
+          audio/mp4=qmmp.desktop;
+          audio/m4a=qmmp.desktop;
+          audio/m4b=qmmp.desktop;
+      tags: ["mime"]
+
+

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Koreader
+Comment=Koreader
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+MimeType=application/pdf;application/epub+zip;application/epub;
+Exec=/home/user/apps/koreader.appimage

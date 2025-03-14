@@ -1,0 +1,4 @@
+[MIME Cache]
+application/epub=koreader.desktop;
+application/epub+zip=koreader.desktop;
+application/pdf=koreader.desktop;

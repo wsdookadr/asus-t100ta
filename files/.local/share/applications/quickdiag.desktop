@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=QuickInfo
+Comment=Quick Diagnostics Script
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=gnome-terminal -- /bin/bash -c '/custom/quickdiag.sh;'

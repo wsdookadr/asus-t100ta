@@ -1,0 +1,2 @@
+[all]
+node1 ansible_host=t100ta ansible_user=user ansible_port=22 ansible_ssh_private_key_file=~/.ssh/t100ta-key ansible_ssh_common_args='-o StrictHostKeyChecking=no'

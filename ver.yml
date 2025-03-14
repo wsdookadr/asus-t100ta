@@ -1,0 +1,48 @@
+---
+- name: Create local dir
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+
+    - set_fact:
+        destdir: "./pkgver/{{ ansible_date_time.date }}"
+
+    - name: create dir
+      ansible.builtin.file:
+        path: "{{ destdir }}"
+        state: directory
+        mode: '0755'
+
+- name: Retrieve versions and store them locally
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+
+    - set_fact:
+        destdir: "./pkgver/{{ ansible_date_time.date }}"
+
+    - name: Package versions
+      shell: pacman -Q > /tmp/pkgver.txt
+
+    - name: uname
+      shell: uname -a > /tmp/uname.txt
+
+    - name: Copy
+      synchronize:
+        src: "/tmp/pkgver.txt"
+        dest: "{{ destdir }}/pkgver.txt"
+        mode: pull
+
+    - name: Copy
+      synchronize:
+        src: "/usr/lib/os-release"
+        dest: "{{ destdir }}/os.txt"
+        mode: pull
+
+    - name: Copy
+      synchronize:
+        src: "/tmp/uname.txt"
+        dest: "{{ destdir }}/uname.txt"
+        mode: pull
+

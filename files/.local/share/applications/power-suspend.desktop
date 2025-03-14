@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Power Suspend
+Comment=Power Suspend
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+#Exec=gnome-terminal -- /bin/bash -c 'echo "Suspending..."; sleep 2; sudo systemctl suspend'
+Exec=gnome-terminal -- /bin/bash -c 'echo "Suspending..."; sleep 2; sudo systemctl suspend; sudo mount -a;'

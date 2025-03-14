@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Restart BT
+Comment=Restart BT
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=gnome-terminal -- /bin/bash -c 'sudo systemctl restart bluetooth'

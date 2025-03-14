@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=NAS music
+Comment=NAS music
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=/usr/bin/nautilus file:///home/nas/music/

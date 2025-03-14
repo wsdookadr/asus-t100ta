@@ -1,0 +1,16 @@
+---
+- name: Sync books
+  hosts: all
+  become: true
+  become_user: user
+  tasks:
+
+    - name: Sync books
+      become: true
+      synchronize:
+        src: /home/nas/shared/for-tablet/
+        dest: /home/user/books/
+        recursive: true
+        delete: false
+
+

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=TV RomaniaTV
+Comment=TV RomaniaTV
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=/usr/bin/mpv https://livestream.romaniatv.net/clients/romaniatv/playlist.m3u8

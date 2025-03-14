@@ -1,0 +1,8 @@
+# ~/.config/autostart/gsettings-reset.desktop
+[Desktop Entry]
+Name=gsettings-reset
+Comment=gsettings-reset
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=env DISPLAY=:0 /custom/onetime.sh

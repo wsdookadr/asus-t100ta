@@ -1,0 +1,50 @@
+---
+- name: ASUS T100TA - Main configs
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+
+    - name: Sync custom scripts
+      become: true
+      synchronize:
+        src: ./files/custom/
+        dest: /custom
+        recursive: true
+        delete: false
+      tags: ["base"]
+
+    - name: Perms
+      shell: |
+        chmod -R 755 /custom/
+
+    - name: Autostart settings and gsettings service
+      become: true
+      become_user: user
+      synchronize:
+        src: ./files/.config/
+        dest: /home/user/.config
+        recursive: true
+        delete: false
+      tags: ["base"]
+
+    - name: Desktop shortcuts
+      become: true
+      become_user: user
+      synchronize:
+        src: ./files/.local/
+        dest: /home/user/.local
+        recursive: true
+        delete: true
+      tags: ["base"]
+
+    - name: Enable and start monitor_gsettings for the user
+      become: true
+      become_user: user
+      systemd_service:
+        name: monitor_gsettings.service
+        state: started
+        scope: "user"
+        enabled: true
+      tags: ["base"]
+
