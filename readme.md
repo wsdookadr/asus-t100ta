@@ -116,17 +116,18 @@ ansible-playbook -i inventory 4.yml
 ansible-playbook -i inventory sync-books.yml
 ```
 
-## Images
-
-![](img/1.JPEG){width=400}
-![](img/2.JPEG){width=300}
-![](img/3.JPEG){width=300}
-![](img/4.JPEG){width=300}
-![](img/5.JPEG){width=400}
-![](img/6.JPEG){width=300}
-![](img/7.JPEG){width=300}
-
 ## Tests
 
 Was tested with the Arch Rolling from 2025-03-01 with kernel 6.13.6
 The camera and the image sensor still do not work.
+
+## Images
+
+<img align="left" src="img/1.JPEG" width="400" />
+<img align="left" src="img/2.JPEG" width="300" />
+<img align="left" src="img/3.JPEG" width="300" />
+<img align="left" src="img/4.JPEG" width="300" />
+<img align="left" src="img/5.JPEG" width="400" />
+<img align="left" src="img/6.JPEG" width="300" />
+<img align="left" src="img/7.JPEG" width="300" />
+
