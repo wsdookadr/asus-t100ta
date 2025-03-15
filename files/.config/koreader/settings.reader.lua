@@ -159,8 +159,6 @@ return {
         ["sync_forward"] = 1,
     },
     ["last_migration_date"] = 20240408,
-    ["lastdir"] = "/home/user",
-    ["lastfile"] = "",
     ["page_turns_tap_zones"] = "default",
     ["panel_zoom_enabled"] = {
         ["cbt"] = true,

@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Spotify
-Comment=Spotify
-Version=1.0
-Type=Application
-Icon=org.gnome.Evince
-Exec=gnome-terminal -- /home/user/apps/ncspot

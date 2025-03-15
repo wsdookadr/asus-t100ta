@@ -7,7 +7,9 @@ I use this tablet sometimes.
 
 - [Wiki page](https://en.wikipedia.org/wiki/Asus_Transformer#ASUS_Transformer_Book_T100TA_(T100TA))
 - [Official specs](https://web.archive.org/web/20220813024105/https://www.asus.com/me-en/Commercial-Laptops/ASUS_Transformer_Book_T100TA/specifications/)
-- [LW probe](https://linux-hardware.org/?probe=34656c0496)
+- [LW probe Fedora](https://linux-hardware.org/?probe=2c7298ac53)
+- [LW probe Fedora](https://linux-hardware.org/?probe=34656c0496)
+- [LW probe Arch](https://linux-hardware.org/?probe=22c56d2c5c)
 
 ## Network Setup
 
@@ -40,6 +42,8 @@ pacman -S --noconfirm --needed vim htop mc tmux
 pacman -S --noconfirm --needed sddm phosh
 ```
 
+note: During the install procedure you'll be asked to create a user. Create a user called `user`
+
 note: Use a small digit-only password because this is a tablet and there will be a keypad on phosh
 to input the password.
 
@@ -48,6 +52,12 @@ Grab `phosh.service`
 
 ```
 wget https://gitlab.gnome.org/World/Phosh/phosh/-/raw/59f219d41dce6d89232af5398ce9e8e862f9aa63/data/phosh.service
+```
+
+Write the following in `/etc/systemd/system/phosh.service.d/override.conf`:
+```
+[Service]
+User=user
 ```
 
 SCP it to `/etc/systemd/system/phosh.service` and enable it, as well as NetworkManager and sshd
@@ -105,6 +115,16 @@ ansible-playbook -i inventory 4.yml
 ```
 ansible-playbook -i inventory sync-books.yml
 ```
+
+## Images
+
+![](img/1.JPEG){width=400}
+![](img/2.JPEG){width=300}
+![](img/3.JPEG){width=300}
+![](img/4.JPEG){width=300}
+![](img/5.JPEG){width=400}
+![](img/6.JPEG){width=300}
+![](img/7.JPEG){width=300}
 
 ## Tests
 
