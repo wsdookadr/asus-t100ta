@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=TSDisable
+Comment=Tailscale Disable
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=gnome-terminal -- /bin/bash -c 'sudo systemctl stop tailscaled; sudo systemctl disable tailscaled; sleep 3;'

@@ -5,24 +5,22 @@ Blog post: https://blog.kylemanna.com/linux/parse-emmc-extended-csd-ecsd-registe
 
 Description: Get eMMC health information
 Tested on ASUS T100TA
-Example:
-
-    root@fedora:/home/user# ./emmc_health.py  | rg -i 'LIFE|HEALTH|EOL'
-    SLC_DEVICE_HEALTH_STATUS[87] = 0x0
-    SLC_DEVICE_HEALTH_STATUS[87] = 0x0
-    MLC_DEVICE_HEALTH_STATUS[94] = 0x0
-    PRE_EOL_INFO[267] = 0x0
-    DEVICE_LIFE_TIME_EST_TYP_A[268] = 0x0
-    DEVICE_LIFE_TIME_EST_TYP_B[269] = 0x8
 
 Check the datasheet of the eMMC or https://wiki.friendlyelec.com/wiki/index.php/EMMC
 on how to interpret the last value above.
 Datasheet: https://www.mouser.com/datasheet/2/669/sandisk_sand-s-a0002728608-1-1747670.pdf
+
+
+Usage:
+
+  ./emmc_health.py | rg "HEALTH|EOL|LIFE|ecsd"
 """
 import binascii
 import re
 import sys
 import os
+import os.path
+import glob
 
 def str2bytearray(s):
   if len(s) % 2:
@@ -42,15 +40,19 @@ def str2bytearray(s):
 
   return out
 
+def find_ecsd_files():
+    for walkdir in glob.glob("/d/mmc*"):
+        for path, directories, files in os.walk(walkdir):
+            for file in files:
+                if file == "ext_csd":
+                    yield os.path.join(path, file)
 
-if __name__ == '__main__':
-
-  os.system("umount /d")
-  os.system("mount -t debugfs debugfs /d")
+def print_csd(file_ecsd):
 
   ecsd_str = ''
-  with open('/d/mmc1/mmc1:0001/ext_csd','r') as f:
+  with open(file_ecsd,'r') as f:
       ecsd_str = f.read().rstrip()
+  print("ecsd: " + file_ecsd)
   
   ecsd = str2bytearray(ecsd_str)
 
@@ -92,3 +94,12 @@ if __name__ == '__main__':
   print("PRE_EOL_INFO[267] = 0x{:x}".format(ecsd[267]))
   print("DEVICE_LIFE_TIME_EST_TYP_A[268] = 0x{:x}".format(ecsd[268]))
   print("DEVICE_LIFE_TIME_EST_TYP_B[269] = 0x{:x}".format(ecsd[269]))
+
+if __name__ == '__main__':
+
+  os.system("mkdir /d 2>/dev/null")
+  os.system("umount /d")
+  os.system("mount -t debugfs debugfs /d")
+
+  for f in find_ecsd_files(): print_csd(f)
+

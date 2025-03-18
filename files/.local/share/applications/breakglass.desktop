@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=BreakGlass
+Comment=BreakGlass
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+# details here https://www.kernel.org/doc/html/v6.13/admin-guide/sysrq.html
+Exec=/usr/bin/sudo bash -c "echo b > /proc/sysrq-trigger"

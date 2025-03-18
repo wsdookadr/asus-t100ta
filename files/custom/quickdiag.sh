@@ -12,6 +12,9 @@ tmux new-session -s quickdiag \; \
   send-keys 'while true; do mtr -Z 3 -c 1 -r google.com; sleep 4; clear; done' C-m \; \
   select-pane -t 0 \; \
   split-window -v \; \
-  send-keys 'while true; do upower -i /org/freedesktop/UPower/devices/battery_BATC | grep "energy\|time to empty\|time to full\|percentage"; sleep 5; clear; done' C-m \;
+  send-keys 'while true; do upower -i /org/freedesktop/UPower/devices/battery_BATC | grep "energy\|time to empty\|time to full\|percentage"; sleep 5; clear; done' C-m \; \
+  select-pane -t 0 \; \
+  split-window -v \; \
+  send-keys 'ip -br addr show dev wlan0 |awk '\''{print $3}'\''; ip route show | grep -i "default via"| awk '\''{print $3 }'\''; ' C-m \;
 
 wait

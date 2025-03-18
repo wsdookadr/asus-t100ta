@@ -33,13 +33,20 @@
           - tailscale
           - brightnessctl
           - inetutils
-        # - flatpak # great for sandboxing(allegedly), but not needed currently
+          - gnuplot
+          # samba client
+          - cifs-utils
+          - smbclient
+          - gvfs-smb
+          # - flatpak # great for sandboxing(allegedly), but not needed currently
         state: present
 
     - name: System tools
       pacman:
         name:
           - powertop
+          - turbostat
+          - perf
          #- powerstat
           - inxi
           - hwinfo

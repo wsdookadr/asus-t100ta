@@ -4,4 +4,4 @@ Comment=Restart Network
 Version=1.0
 Type=Application
 Icon=org.gnome.Evince
-Exec=gnome-terminal -- /bin/bash -c 'sudo systemctl restart NetworkManager'
+Exec=gnome-terminal -- /bin/bash -c 'sudo systemctl --force restart NetworkManager'

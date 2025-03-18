@@ -87,12 +87,17 @@ Add this line at the end of `/etc/sudoers`:
 user ALL=(ALL) NOPASSWD: ALL
 ```
 
-Get Librewolf installed, but install Yay first:
+Install Yay (AUR helper):
 ```
 sudo pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+```
+
+Install Paru (AUR helper)
+```
+yay -S paru-bin
 ```
 
 Install librewolf:

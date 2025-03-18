@@ -4,4 +4,4 @@ Comment=Restart System
 Version=1.0
 Type=Application
 Icon=org.gnome.Evince
-Exec=gnome-terminal -- /bin/bash -c 'sudo systemctl reboot'
+Exec=gnome-terminal -- /bin/bash -c 'sudo systemctl --force --force reboot'

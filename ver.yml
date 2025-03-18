@@ -5,7 +5,7 @@
   tasks:
 
     - set_fact:
-        destdir: "./pkgver/{{ ansible_date_time.date }}"
+        destdir: "./other/pkgver/{{ ansible_date_time.date }}"
 
     - name: create dir
       ansible.builtin.file:

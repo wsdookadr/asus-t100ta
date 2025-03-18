@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=TSEnable
+Comment=Tailscale Enable
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=gnome-terminal -- /bin/bash -c 'sudo systemctl start tailscaled; sudo systemctl enable tailscaled; sleep 3;'
