@@ -1,0 +1,89 @@
+---
+- name: Init
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Packages
+      pacman:
+        name:
+          - iwd
+          - vim
+          - htop
+          - mc
+          - tmux
+          - sddm
+          - phosh
+          - gnome-control-center
+          - wget
+          - curl
+          - git
+          - base-devel
+        state: latest
+        update_cache: true
+      tags: ["base"]
+
+    - name: Set up phosh.service
+      shell: wget --continue -O /etc/systemd/system/phosh.service https://gitlab.gnome.org/World/Phosh/phosh/-/raw/59f219d41dce6d89232af5398ce9e8e862f9aa63/data/phosh.service
+
+    - name: phosh.service.d directory
+      ansible.builtin.file:
+        path: /etc/systemd/system/phosh.service.d
+        state: directory
+
+    - name: Set up override.conf
+      copy:
+        dest: /etc/systemd/system/phosh.service.d/override.conf
+        content: |
+          [Service]
+          User=user
+
+    - name: Enable phosh service
+      systemd_service:
+        name: phosh.service
+        state: started
+        enabled: true
+
+    - name: Disable services 
+      systemd_service:
+        name: '{{ item }}'
+        state: stopped
+        masked: true
+        enabled: false
+      with_items:
+        - dev-tpmrm0.device
+        - tpm2.target
+        - veritysetup.service
+        - cryptsetup.service
+        - veritysetup.target
+        - cryptsetup.target
+      ignore_errors: true
+
+    - name: Set up yay
+      become: true
+      become_user: user
+      shell: |
+        git clone https://aur.archlinux.org/yay-bin.git || true
+        cd yay-bin && makepkg -si --noconfirm
+      tags: ["yay"]
+
+    - name: Update yay pkg list
+      shell: |
+        yay -Syy
+      tags: ["yay"]
+
+    - name: Set up paru
+      become: true
+      become_user: user
+      shell: yay -S --noconfirm paru-bin
+      ignore_errors: true
+      tags: ["yay"]
+
+    - name: Set up librewolf
+      become: true
+      become_user: user
+      shell: yay -S --noconfirm librewolf-bin
+      ignore_errors: true
+      tags: ["yay"]
+
+

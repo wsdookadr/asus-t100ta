@@ -1,0 +1,36 @@
+---
+- name: Key refresh
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+
+    - name: host key rotation for SSH
+      shell: |
+        sudo ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N "" <<<y
+        sudo ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N "" <<<y
+        sudo ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N "" <<<y
+
+    - name: host key rotation for Tailscale
+      shell: |
+        sudo rm -f /var/lib/tailscale/tailscaled.state
+
+    - name: reload SSH service
+      systemd_service:
+        name: sshd
+        state: reloaded
+
+    - name: restart Tailscale
+      systemd_service:
+        name: tailscaled
+        state: restarted
+
+    - name: delete librewolf data
+      ansible.builtin.file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - /home/user/.librewolf/
+        - /home/user/.cache/librewolf/
+
+

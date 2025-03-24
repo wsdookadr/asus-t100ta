@@ -26,6 +26,7 @@
           - wget
           - dpkg
           - fuse2 # for appimage binaries
+          - libxcrypt-compat # for appimage
           - e2fsprogs # for debugfs
           - man-db
           - tldr
@@ -38,6 +39,9 @@
           - cifs-utils
           - smbclient
           - gvfs-smb
+          - pcmanfm-qt
+          - zip
+          - unzip
           # - flatpak # great for sandboxing(allegedly), but not needed currently
         state: present
 
@@ -63,6 +67,7 @@
           # docs
           - okular
           - evince
+          - papers
           - djvulibre
           - djview
           - libreoffice-still

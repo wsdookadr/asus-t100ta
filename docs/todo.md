@@ -1,3 +1,18 @@
+## enhance security with some form of sandboxing
+
+[landrun](https://github.com/Zouuup/landrun)
+
+## explore speedups
+
+* [this gist](https://gist.github.com/jwbee/7e8b27e298de8bbbf8abfa4c232db097) discusses speeding up certain packages by using a better allocator and better compiler
+* replacing some [core tools](https://lwn.net/SubscriberLink/1014002/580b8750bf02cf41/) via oxidizr could help
+
+## fix koreader settings pre-provisioned
+
+koreader settings are pre-provisioned but this ends up in koreader crashing.
+koreader should instead be allowed to generate and initialize its stuff on its own and then
+the settings file should should be applied.
+
 ## [done] quick info shortcut
 
 have a desktop shortcut that shows

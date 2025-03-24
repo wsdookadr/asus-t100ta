@@ -62,7 +62,7 @@
 
           [Added Associations]
           text/plain=org.gnome.TextEditor.desktop;
-          application/pdf=org.gnome.Evince.desktop;
+          application/pdf=org.gnome.Papers.desktop;
           image/vnd.djvu=djvulibre-djview4.desktop;
           image/x-djvu=djvulibre-djview4.desktop;
           application/epub+zip=koreader.desktop;

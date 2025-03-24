@@ -1,6 +1,7 @@
 #!/bin/bash
 readarray -t PROGRAMS <<EOF
 /usr/share/applications/bvnc.desktop
+/usr/share/applications/bssh.desktop
 /usr/share/applications/avahi-discover.desktop
 /usr/share/applications/vim.desktop
 /usr/share/applications/btop.desktop
@@ -19,6 +20,8 @@ readarray -t PROGRAMS <<EOF
 /usr/share/applications/libreoffice-writer.desktop
 /usr/share/applications/libreoffice-xsltfilter.desktop
 /usr/share/applications/org.gnome.Extensions.desktop
+/usr/share/applications/org.gnome.Evince.desktop
+/usr/share/applications/org.gnome.Papers.desktop
 /usr/share/applications/djvulibre-djview4.desktop
 /usr/share/applications/smplayer.desktop
 EOF

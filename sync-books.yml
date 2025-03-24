@@ -1,4 +1,6 @@
 ---
+# this playbook assumes /home/nas/shared is already mounted to
+# the NAS on the machine where you run this.
 - name: Sync books
   hosts: all
   become: true
@@ -11,6 +13,6 @@
         src: /home/nas/shared/for-tablet/
         dest: /home/user/books/
         recursive: true
-        delete: false
+        delete: true
 
 

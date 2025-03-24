@@ -1,0 +1,12 @@
+[Unit]
+Description=Configure CPU power related settings
+After=syslog.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/cpupower frequency-set -g ondemand -d "533200" -u "896743"
+ExecStop=/usr/bin/cpupower frequency-set -g performance -d "1866191" -u "1866191"
+
+[Install]
+WantedBy=multi-user.target

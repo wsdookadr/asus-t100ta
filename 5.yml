@@ -1,0 +1,56 @@
+- name: Power settings
+  hosts: all
+  become: true
+  tasks:
+    - name: Packages
+      pacman:
+        name:
+          - cpupower
+          - powertop
+        state: latest
+        update_cache: true
+
+    - name: Copy systemd service
+      synchronize:
+        src: ./files/cpupower.service
+        dest: /etc/systemd/system/cpupower.service
+
+    - name: Copy powertop service
+      synchronize:
+        src: ./files/powertop.service
+        dest: /etc/systemd/system/powertop.service
+
+    - name: Set up service for CPU frequency scaling
+      ansible.builtin.systemd_service:
+        name: cpupower.service
+        state: started
+        daemon_reload: true
+        enabled: true
+
+    - name: Get current settings
+      shell: cpupower frequency-info | rg "current policy"
+      register: cpufreq
+
+    - name: Display settings
+      debug:
+        msg: "{{ cpufreq.stdout }}"
+      tags: ["display"]
+
+    - name: Powertop autotune
+      ansible.builtin.systemd_service:
+        name: powertop.service
+        state: started
+        daemon_reload: true
+        enabled: true
+
+    # https://gist.github.com/jcberthon/ea8cfe278998968ba7c5a95344bc8b55
+    - name: Disable wifi power saving
+      blockinfile:
+        path: /etc/NetworkManager/conf.d/wifi-powersave-off.conf
+        create: true
+        block: |
+          [connection]
+          wifi.powersave = 3
+      tags: ["powersave"]
+
+
