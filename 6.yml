@@ -1,0 +1,35 @@
+- name: Maps apps
+  hosts: all
+  become: true
+  tasks:
+    # https://github.com/flatpak/flatpak/wiki/Tips-&-Tricks
+    - name: Install flatpak
+      pacman:
+        name:
+          - flatpak
+        state: latest
+        update_cache: true
+
+    - name: Add flathub remote
+      become: yes
+      become_user: user
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+        method: user
+
+    # apps are located at ~/.local/share/flatpak/app/
+    # offline tiles at ./.var/app/com.milesalan.mepo/
+    - name: Install apps
+      become: yes
+      become_user: user
+      community.general.flatpak:
+        name:
+          - app.organicmaps.desktop
+          - com.milesalan.mepo
+        state: present
+        method: user
+        remote: flathub
+
+

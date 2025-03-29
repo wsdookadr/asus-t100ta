@@ -52,7 +52,9 @@ maybe this as well
 https://github.com/eklins/FDTV
 ```
 
-## pdf viewer needs to save state
+## [solved] pdf viewer needs to save state
+
+solution: switched from evince to papers (papers does save state)
 
 evince can't remember the page number
 

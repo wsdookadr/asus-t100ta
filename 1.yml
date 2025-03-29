@@ -32,8 +32,8 @@
       become: true
       become_user: user
       synchronize:
-        src: ./files/.local/
-        dest: /home/user/.local
+        src: ./files/.local/share/applications
+        dest: /home/user/.local/share/applications
         recursive: true
         delete: true
       tags: ["base"]

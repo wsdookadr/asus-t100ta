@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Maps Mepo
+Comment=Maps Mepo
+Version=1.0
+Type=Application
+Icon=org.gnome.Evince
+Exec=/bin/bash -c 'XDG_RUNTIME_DIR=/run/user/1000 PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/home/user/.local/share/flatpak/exports/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl" XDG_DATA_DIRS="/home/user/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share" /usr/bin/flatpak run com.milesalan.mepo -hw > /tmp/logs.txt 2>&1'

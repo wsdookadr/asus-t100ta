@@ -1,7 +1,7 @@
 ## Capabilities
 
 
-| capability | software |
+| capability | apps |
 | :---- | :---- |
 | read PDF | okular, gnome papers|
 | read EPUB | koreader |
@@ -16,6 +16,7 @@
 | read RSS/ATOM news feeds | gfeeds, newsflash |
 | wifi connectivity | networkmanager |
 | ability to rsync files to the tablet | rsync via ansible playbook |
+| offline maps | mepo, organic maps |
 | bluetooth connectivity | yes |
 | easy file sharing | TODO |
 

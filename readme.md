@@ -1,14 +1,3 @@
-## Usage
-
-You can download the image and flash it to the tablet's eMMC [using dd](https://www.gnu.org/software/coreutils/manual/html_node/dd-invocation.html#dd-invocation):
-```
-zstdcat file.img.zst | dd of=/dev/mmcblk1 bs=2M
-```
-
-Images:
-
-- https://archive.org/details/arch-asus-t100ta-0.1-2025-03-24.img
-
 ## Hardware
 
 Asus T100TA specs:
@@ -22,18 +11,35 @@ Asus T100TA specs:
 
 ## OS attempts
 
-Fedora 41 had high base memory usage, many unneeded packages, old Phosh versions, missing packages from rpm repositories. Brightness was working, audio working, wifi working, rotation working.
+Fedora 41 - high base memory usage, many unneeded packages, old Phosh versions, missing packages from rpm repositories, brightness working, audio working, wifi working, rotation working.
 
-[Bliss-Go](https://netix.dl.sourceforge.net/project/blissos-x86/Official/BlissOS15/Gapps/Go/Bliss-Go-v15.9.2-x86_64-OFFICIAL-gapps-20241012.iso?viasf=1) was fast and smooth but had random reboots.
-Problems getting the regular home router wifi connection working. Rotation working well, brightness working, audio working.
+[Bliss-Go](https://netix.dl.sourceforge.net/project/blissos-x86/Official/BlissOS15/Gapps/Go/Bliss-Go-v15.9.2-x86_64-OFFICIAL-gapps-20241012.iso?viasf=1) - fast, smooth, random resets(reasons unknown), couldn't get wifi to work with home router, rotation working well, brightness working, audio working.
 
-[PostmarketOS](https://linux-hardware.org/?probe=a78534950a) [generic img](https://images.postmarketos.org/bpo/v24.12/generic-x86_64/phosh/20250319-0121/20250319-0121-postmarketOS-v24.12-phosh-22.5-generic-x86_64-lts.img.xz) was pretty good but orientation sensor accelerometer wasn't working. Alpine-derived, definitely faster than Arch, at least in terms of app start time and browsing. Probably missing driver. At this time there's no specific support for ASUS T100TA in the [pmaports](https://gitlab.com/postmarketOS/pmaports/-/tree/master/device/testing), so definitely the driver for the accelerometer might be missing or the one for `intel_backlight` (?) (that's the only time when the backlight was not working, when `intel_backlight` is disabled). Work required in pmaports to support specifics.
+[PostmarketOS](https://linux-hardware.org/?probe=a78534950a) - [generic img](https://images.postmarketos.org/bpo/v24.12/generic-x86_64/phosh/20250319-0121/20250319-0121-postmarketOS-v24.12-phosh-22.5-generic-x86_64-lts.img.xz) was pretty good but orientation sensor accelerometer wasn't working. apps and browser were fast. probably missing driver. At this time there's no specific support for ASUS T100TA in the [pmaports](https://gitlab.com/postmarketOS/pmaports/-/tree/master/device/testing), so definitely the driver for accelerometer might be missing or the one for `intel_backlight` (?) (that's the only time when the backlight was not working, when `intel_backlight` is disabled). work required in pmaports to support specifics.
 
-[Arch](https://linux-hardware.org/?probe=22c56d2c5c) almost everything works but somewhat slow. Up to date, recent versions of packages, secure, large package selection in repos.
+Arch - everything works(except for the camera which doesn't work anywhere). up to date, recent versions of packages, large package selection in repos.
 
-The remainder of this readme and this repo will focus on Arch.
+The remainder of this readme is about Arch.
 
-## Network
+## Using the pre-built image
+
+Download the image and flash it to the tablet's eMMC:
+```
+wget -O arch.img.zst --continue https://archive.org/download/arch-asus-t100ta-0.1-2025-03-24.img/arch-asus-t100ta-0.1-2025-03-24.img.zst
+zstdcat arch.img.zst | dd of=/dev/mmcblk1 bs=2M
+```
+
+Credentials:
+```
+user: user
+pass: 1234
+```
+
+## Building the image
+
+### Network
+
+If the Arch iso doesn't provide network connectivity out of the box, you can connect manually.
 
 ```
 iwctl --passphrase <pass> station wlan0 connect-hidden <home_network_name>
@@ -50,9 +56,7 @@ ip route add default via 192.168.1.1
 echo "nameserver 8.8.8.8" > /etc/resolv.conf
 ```
 
-Similar for wired networks.
-
-## Install
+### Install
 
 Boot from [Arch 2025-03-01](https://archive.archlinux.org/iso/2025.03.01/archlinux-2025.03.01-x86_64.iso).
 
@@ -88,15 +92,12 @@ Password:
 [root@tablet user]# echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 ```
 
-## Running Ansible playbooks
+### Running Ansible playbooks
+
+Run all playbooks numbered 0 up to 5, the rest are optional.
 
 ```
 ansible-playbook -i inventory 0.yml
-ansible-playbook -i inventory 1.yml
-ansible-playbook -i inventory 2.yml
-ansible-playbook -i inventory 3.yml
-ansible-playbook -i inventory 4.yml
-ansible-playbook -i inventory 5.yml
 ```
 
 ## Syncing books
@@ -108,11 +109,6 @@ ansible-playbook -i inventory sync-books.yml
 ## Images
 
 <img align="left" src="img/1.JPEG" width="400" />
-<img align="left" src="img/2.JPEG" width="300" />
-<img align="left" src="img/3.JPEG" width="300" />
 <img align="left" src="img/4.JPEG" width="300" />
-<img align="left" src="img/5.JPEG" width="400" />
-<img align="left" src="img/6.JPEG" width="300" />
-<img align="left" src="img/7.JPEG" width="300" />
 
 
